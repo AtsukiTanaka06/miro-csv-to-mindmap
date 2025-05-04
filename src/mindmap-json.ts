@@ -1,6 +1,6 @@
 interface Node {
   nodeView: { content: string };
-  children?: Node[];
+  children: Node[];
 }
 
 interface InputJsonNode {
@@ -9,19 +9,32 @@ interface InputJsonNode {
 }
 
 /**
- * 再帰的にJSONデータを Miro の Node 構造に変換する
+ * JSONからCSVと同じNode構造を作成
+ * visitedの概念を保ちながら、再帰的に構築する
  */
-const convertJsonToMindmapNode = (json: InputJsonNode): Node => {
-  return {
-    nodeView: { content: json.name },
-    children: json.children?.map(convertJsonToMindmapNode) || [],
-  };
-};
+const createGraphFromJson = (json: InputJsonNode): Node => {
+  const visited: Record<string, Node> = {};
 
-/**
- * JSONデータからマインドマップを作成
- */
-export const createMindmapFromJson = async (jsonData: InputJsonNode) => {
-  const rootNode = convertJsonToMindmapNode(jsonData);
-  await miro.board.experimental.createMindmapNode(rootNode);
+  const walk = (node: InputJsonNode, path: string[] = []): Node => {
+    const key = [...path, node.name].join(" > ");
+
+    if (!visited[key]) {
+      const newNode: Node = {
+        nodeView: { content: node.name },
+        children: [],
+      };
+      visited[key] = newNode;
+
+      if (node.children && node.children.length > 0) {
+        for (const child of node.children) {
+          const childNode = walk(child, [...path, node.name]);
+          newNode.children.push(childNode);
+        }
+      }
+    }
+
+    return visited[key];
+  };
+
+  return walk(json);
 };
