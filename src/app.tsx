@@ -65,7 +65,7 @@ const App: React.FC = () => {
 
   return (
     <div className="dnd-container">
-      <p>Select the Json file to import and create a mind map</p>
+      <p>Select the Json file to import and create a mind map fixed</p>
       <div {...dropzone.getRootProps({ style })}>
         <input {...dropzone.getInputProps()} />
         {dropzone.isDragAccept ? (
