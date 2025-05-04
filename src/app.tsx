@@ -2,6 +2,7 @@ import * as React from "react";
 import { createRoot } from "react-dom/client";
 import { useDropzone } from "react-dropzone";
 import { parseCsv } from "./csv-utils";
+import { parseJson } from "./json-utils";
 import { createMindmap } from "./mindmap";
 
 // UI
@@ -33,7 +34,8 @@ const App: React.FC = () => {
     const failed = [];
     for (const file of files) {
       try {
-        const contents = await parseCsv(file);
+        //const contents = await parseCsv(file);
+        const contents = await parseJson(file);
         await createMindmap(contents);
       } catch (e) {
         failed.push(file);
@@ -61,11 +63,11 @@ const App: React.FC = () => {
 
   return (
     <div className="dnd-container">
-      <p>Select the CSV file to import and create a mind map</p>
+      <p>Select the Json file to import and create a mind map</p>
       <div {...dropzone.getRootProps({ style })}>
         <input {...dropzone.getInputProps()} />
         {dropzone.isDragAccept ? (
-          <p className="dnd-text">Drop your CSV file here</p>
+          <p className="dnd-text">Drop your Json file here</p>
         ) : (
           <>
             <div>
@@ -73,9 +75,9 @@ const App: React.FC = () => {
                 type="button"
                 className="button button-primary button-small"
               >
-                Select CSV file
+                Select Json file
               </button>
-              <p className="dnd-text">Or drop your CSV file here</p>
+              <p className="dnd-text">Or drop your Json file here</p>
             </div>
           </>
         )}
