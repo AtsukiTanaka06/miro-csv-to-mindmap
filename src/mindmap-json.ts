@@ -38,3 +38,19 @@ const createGraphFromJson = (json: InputJsonNode): Node => {
 
   return walk(json);
 };
+
+interface JsonNode {
+  name: string;
+  children?: JsonNode[];
+}
+
+/**
+ * JSON形式のデータからマインドマップを作成
+ *
+ * @param json Json形式のマインドマップデータ
+ */
+export const createMindmapFromJson = async (json: JsonNode) => {
+  const root = createGraphFromJson(json);
+
+  await miro.board.experimental.createMindmapNode(root);
+};
