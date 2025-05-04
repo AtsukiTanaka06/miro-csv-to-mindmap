@@ -23,7 +23,7 @@ const App: React.FC = () => {
   const [files, setFiles] = React.useState<File[]>([]);
   const dropzone = useDropzone({
     accept: {
-      "text/csv": [".csv"],
+      "application/json": [".json"],
     },
     maxFiles: 1,
     onDrop: (droppedFiles) => {
