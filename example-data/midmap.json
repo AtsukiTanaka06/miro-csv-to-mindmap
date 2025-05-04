@@ -1,0 +1,37 @@
+{
+  "name": "Miro Mind Map",
+  "children": [
+    {
+      "name": "Use cases",
+      "children": [
+        { "name": "Brainstorm" },
+        { "name": "Structure research results" },
+        { "name": "Design information architecture" },
+        { "name": "Plan projects" },
+        { "name": "Create org charts" },
+        { "name": "Develop sales strategies" },
+        { "name": "Analyze problems" }
+      ]
+    },
+    {
+      "name": "Robust collaborative features",
+      "children": [
+        { "name": "Real-time collaboration" },
+        { "name": "Endless canvas" },
+        { "name": "Comments" },
+        { "name": "Video chat" },
+        { "name": "Presentation mode" },
+        { "name": "High resolution export" }
+      ]
+    },
+    {
+      "name": "Mind mapping features",
+      "children": [
+        { "name": "Different themes" },
+        { "name": "Keyboard shortcuts" },
+        { "name": "Auto arrange" },
+        { "name": "Links to anything" }
+      ]
+    }
+  ]
+}

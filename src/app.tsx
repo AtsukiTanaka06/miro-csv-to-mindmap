@@ -4,6 +4,7 @@ import { useDropzone } from "react-dropzone";
 import { parseCsv } from "./csv-utils";
 import { parseJson } from "./json-utils";
 import { createMindmap } from "./mindmap";
+import { createMindmapFromJson } from "./mindmap-json";
 
 // UI
 const dropzoneStyles = {
@@ -36,7 +37,8 @@ const App: React.FC = () => {
       try {
         //const contents = await parseCsv(file);
         const contents = await parseJson(file);
-        await createMindmap(contents);
+        //await createMindmap(contents);
+        await createMindmapFromJson(contents);
       } catch (e) {
         failed.push(file);
         console.error(e);
